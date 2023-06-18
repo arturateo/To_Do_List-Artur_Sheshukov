@@ -8,4 +8,8 @@ def home(request):
     return render(request, 'index.html', datas)
 
 
-
+def add_tasks(request):
+    if request.method == "GET":
+        print(1)
+    else:
+        print(2)
