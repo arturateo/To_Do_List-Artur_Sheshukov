@@ -1,13 +1,40 @@
+{% load static %}
 <!doctype html>
-<html lang="en">
+<html lang="ru">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport"
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="{% static '/css/bootstrap.min.css' %}">
     <title>Document</title>
 </head>
     <body>
-        <h1>Hello</h1>
+        <div class="container">
+            <p><a href="/add">Добавить задачу</a></p>
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th scope="col">#</th>
+                        <th scope="col">Описание</th>
+                        <th scope="col">Статус</th>
+                        <th scope="col">Дата выполнения</th>
+                        <th scope="col">Изменить</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for list in lists %}
+                        <tr>
+                            <th scope="row">{{ list.id }}</th>
+                            <td>{{ list.description }}</td>
+                            <td>{{ list.status }}</td>
+                            <td>{{ list.date_of_completion }}</td>
+                            <td>Ссылка</td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
     </body>
+<script src="{% static '/js/bootstrap.min.js' %}"></script>
 </html>
