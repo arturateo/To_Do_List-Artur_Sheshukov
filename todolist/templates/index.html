@@ -11,7 +11,7 @@
 </head>
     <body>
         <div class="container">
-            <p><a href="/add">Добавить задачу</a></p>
+            <p><a href="/add" class="link-info link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover">Добавить задачу</a></p>
             <table class="table">
                 <thead>
                     <tr>
@@ -19,7 +19,7 @@
                         <th scope="col">Описание</th>
                         <th scope="col">Статус</th>
                         <th scope="col">Дата выполнения</th>
-                        <th scope="col">Изменить</th>
+                        <th scope="col">Удалить</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -27,9 +27,13 @@
                         <tr>
                             <th scope="row">{{ list.id }}</th>
                             <td>{{ list.description }}</td>
-                            <td>{{ list.status }}</td>
+                                {% for choice in choices %}
+                                    {% if choice.0 == list.status %}
+                                        <td>{{ choice.1 }}</td>
+                                    {% endif %}
+                                {% endfor %}
                             <td>{{ list.date_of_completion }}</td>
-                            <td>Ссылка</td>
+                            <td><a href="delete/?id={{ list.id }}">Удалить задачу</a></td>
                         </tr>
                     {% endfor %}
                 </tbody>

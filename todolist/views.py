@@ -1,15 +1,30 @@
 from django.shortcuts import render
-from todolist.models import ToDoList
+from todolist.models import ToDoList, status_choices
+from django.http import HttpResponseRedirect
 
 
 def home(request):
     to_do_list = ToDoList.objects.all()
-    datas = {'lists': to_do_list}
+    datas = {'lists': to_do_list, 'choices': status_choices}
     return render(request, 'index.html', datas)
 
 
 def add_tasks(request):
     if request.method == "GET":
-        print(1)
+        datas = {'lists': status_choices}
+        return render(request, 'add_tasks.html', datas)
     else:
-        print(2)
+        description = request.POST.get('description')
+        status = request.POST.get('status')
+        date_of_completion = request.POST.get('date_of_completion')
+        if not date_of_completion:
+            date_of_completion = None
+        ToDoList.objects.create(description=description, status=status, date_of_completion=date_of_completion)
+        return HttpResponseRedirect('/')
+
+
+def delete_task(request):
+    todolist_id = request.GET.get("id")
+    todolist = ToDoList.objects.get(pk=todolist_id)
+    todolist.delete()
+    return HttpResponseRedirect('/')
