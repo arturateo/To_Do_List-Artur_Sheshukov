@@ -22,7 +22,7 @@
                 {% endif %}
             {% endfor %}
             <td>{{ list.date_of_completion }}</td>
-            <td><a href="delete/?id={{ list.id }}">Удалить задачу</a></td>
+            <td><a href="{% url 'delete_task' list.id %}">Удалить задачу</a></td>
         </tr>
     {% endfor %}
     </tbody>

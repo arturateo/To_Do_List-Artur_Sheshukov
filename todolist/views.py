@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render, get_object_or_404, redirect
 from todolist.models import ToDoList, status_choices
 from django.http import HttpResponseRedirect
 
@@ -23,8 +23,8 @@ def add_tasks(request):
         return HttpResponseRedirect('/')
 
 
-def delete_task(request):
-    todolist_id = request.GET.get("id")
+def delete_task(request, pk):
+    todolist_id = request.GET.get(pk=pk)
     todolist = ToDoList.objects.get(pk=todolist_id)
     todolist.delete()
-    return HttpResponseRedirect('/')
+    return redirect(request, 'index.html')
