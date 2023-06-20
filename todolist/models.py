@@ -4,6 +4,7 @@ status_choices = [('new', 'Новая'), ('in_progress', 'В процессе'),
 
 
 class ToDoList(models.Model):
+    name_task = models.CharField(max_length=100, null=False, blank=False, verbose_name='Название задачи')
     description = models.TextField(max_length=3000, null=False, blank=False, verbose_name='Описание задачи')
     status = models.CharField(max_length=40, null=False, blank=False, default='new', verbose_name='Статус',
                               choices=status_choices)

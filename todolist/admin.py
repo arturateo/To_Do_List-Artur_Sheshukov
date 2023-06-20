@@ -3,11 +3,11 @@ from todolist.models import ToDoList
 
 
 class ArticleAdmin(admin.ModelAdmin):
-    list_display = ['id', 'description', 'status', 'date_of_completion']
-    list_display_links = ['id', 'description']
+    list_display = ['id', 'name_task', 'description', 'status', 'date_of_completion']
+    list_display_links = ['id', 'name_task', 'description']
     list_filter = ['status']
     search_fields = ['description', 'status']
-    fields = ['description', 'status', 'date_of_completion']
+    fields = ['name_task', 'description', 'status', 'date_of_completion']
 
 
 admin.site.register(ToDoList, ArticleAdmin)
