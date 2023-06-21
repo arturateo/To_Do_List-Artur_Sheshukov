@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+{% block title %}Детальный просмотр{% endblock %}
+{% block content %}
+    <ul class="list-group list-group-flush">
+        <li class="list-group-item"><span style="font-weight: bold;">ID:</span>{{ task.id }}</li>
+        <li class="list-group-item"><span style="font-weight: bold;">Название:</span>{{ task.name_task }}</li>
+        <li class="list-group-item description"><span style="font-weight: bold;">Описание:</span>{{ task.description }}</li>
+        {% for choice in choices %}
+            {% if choice.0 == task.status %}
+                <li class="list-group-item"><span style="font-weight: bold;">Статус:</span>{{ choice.1 }}</li>
+            {% endif %}
+        {% endfor %}
+        <li class="list-group-item"><span style="font-weight: bold;">Дата завершения:</span>{{ task.date_of_completion }}</li>
+    </ul>
+{% endblock %}

@@ -1,17 +1,21 @@
 {% extends 'base.html' %}
 {% load static %}
-{% block link %}
-{% endblock %}
+{% block title %}Добавить задачу{% endblock %}
+{% block link %}{% endblock %}
 {% block content %}
     <form method="POST">
         {% csrf_token %}
+        <div class="mb-3">
+            <label for="name_task" class="form-label">Введите название задачи</label>
+            <input class="form-control" name="name_task" id="name_task" placeholder="Название задачи">
+        </div>
         <div class="mb-3">
             <label for="description" class="form-label">Введите описание задачи</label>
             <textarea class="form-control" name="description" id="description" placeholder="Описание задачи"></textarea>
         </div>
         <div class="mb-3">
-            <label for="status" class="form-label">Password</label>
-            <select class="form-select" name="status" aria-label="Default select example">
+            <label for="status" class="form-label">Статус задачи</label>
+            <select class="form-select" id="status" name="status" aria-label="Default select example">
                 {% for list in lists %}
                     <option value="{{ list.0 }}">{{ list.1 }}</option>
                 {% endfor %}
