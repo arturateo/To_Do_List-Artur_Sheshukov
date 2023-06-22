@@ -27,4 +27,6 @@
     *       python manage.py loaddata fixtures/dump.json
 
 #### Теперь можно пользоваться приложением
-
+```
+Логин/пароль от админ панели: admin
+```
