@@ -1,10 +1,10 @@
 {% extends 'base.html' %}
 {% load static %}
-{% block title %}Добавить задачу{% endblock %}
+{% block title %}Изменить задачу{% endblock %}
 {% block link %}{% endblock %}
 {% block content %}
     <form method="POST">
         {% include 'partial/task_form.html' %}
-        <button type="submit" class="btn btn-primary">Создать новую задачу</button>
+        <button type="submit" class="btn btn-primary">Изменить задачу</button>
     </form>
 {% endblock %}
