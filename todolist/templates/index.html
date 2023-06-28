@@ -10,8 +10,9 @@
         <th scope="col">Описание</th>
         <th scope="col">Статус</th>
         <th scope="col">Дата выполнения</th>
-        <th scope="col">Детальный просмотр</th>
-        <th scope="col">Удалить</th>
+        <th scope="col">Просмотр</th>
+        <th scope="col">Редактирование</th>
+        <th scope="col">Удаление</th>
     </tr>
     </thead>
     <tbody>
@@ -26,8 +27,9 @@
                 {% endif %}
             {% endfor %}
             <td>{{ task.date_of_completion }}</td>
-            <td><a href="{% url 'detail_task' task.id %}">Просмотр задачи</a></td>
-            <td><a href="{% url 'delete_task' task.id %}">Удалить задачу</a></td>
+            <td align="center"><a href="{% url 'detail_task' task.id %}"><i class="fa-solid fa-eye"></i></a></td>
+            <td align="center"><a href="{% url 'edit_task' task.id %}"><i class="fa-solid fa-pencil"></i></a></td>
+            <td align="center"><a href="{% url 'delete_task' task.id %}"><i class="fa-sharp fa-solid fa-xmark"></i></a></td>
         </tr>
     {% endfor %}
     </tbody>
