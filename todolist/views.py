@@ -1,6 +1,6 @@
 from django.shortcuts import render, get_object_or_404, redirect
 
-from todolist.forms.forms_task import TaskForm, TaskMultyDelete
+from todolist.forms.forms_task import TaskForm
 from todolist.models import ToDoList, status_choices
 
 
