@@ -2,36 +2,45 @@
 {% load static %}
 {% block title %}Главная{% endblock %}
 {% block content %}
-<table class="table">
-    <thead>
-    <tr>
-        <th scope="col">#</th>
-        <th scope="col">Название задачи</th>
-        <th scope="col">Описание</th>
-        <th scope="col">Статус</th>
-        <th scope="col">Дата выполнения</th>
-        <th scope="col">Просмотр</th>
-        <th scope="col">Редактирование</th>
-        <th scope="col">Удаление</th>
-    </tr>
-    </thead>
-    <tbody>
-    {% for task in tasks %}
-        <tr>
-            <th scope="row">{{ task.id }}</th>
-            <td>{{ task.name_task }}</td>
-            <td class="description">{{ task.description }}</td>
-            {% for choice in choices %}
-                {% if choice.0 == task.status %}
-                    <td>{{ choice.1 }}</td>
-                {% endif %}
+    <form action="{% url 'multiply_delete_task' %}" method="POST">
+    {% csrf_token %}
+        <button type="submit" class="btn btn-danger">Удалить выделенные задачи</button>
+        <table class="table">
+            <thead>
+            <tr>
+                <th scope="col">#</th>
+                <th scope="col">Название задачи</th>
+                <th scope="col">Статус</th>
+                <th scope="col">Дата выполнения</th>
+                <th scope="col">Просмотр</th>
+                <th scope="col">Редактирование</th>
+                <th scope="col">Удаление</th>
+                <th scope="col">Выбрать</th>
+            </tr>
+            </thead>
+            <tbody>
+            {% for task in tasks %}
+                <tr>
+                    <th scope="row">{{ task.id }}</th>
+                    <td>{{ task.name_task }}</td>
+                    {% for choice in choices %}
+                        {% if choice.0 == task.status %}
+                            <td>{{ choice.1 }}</td>
+                        {% endif %}
+                    {% endfor %}
+                    <td>{{ task.date_of_completion }}</td>
+                    <td align="center"><a href="{% url 'detail_task' task.id %}"><i class="fa-solid fa-eye"></i></a>
+                    </td>
+                    <td align="center"><a href="{% url 'edit_task' task.id %}"><i class="fa-solid fa-pencil"></i></a>
+                    </td>
+                    <td align="center"><a href="{% url 'delete_task' task.id %}"><i
+                            class="fa-sharp fa-solid fa-xmark"></i></a></td>
+                    <td align="center"><label for="check_{{ task.id }}">
+                        <input type="checkbox" id="check_{{ task.id }}" name="check" value="{{ task.id }}"></label></td>
+
+                </tr>
             {% endfor %}
-            <td>{{ task.date_of_completion }}</td>
-            <td align="center"><a href="{% url 'detail_task' task.id %}"><i class="fa-solid fa-eye"></i></a></td>
-            <td align="center"><a href="{% url 'edit_task' task.id %}"><i class="fa-solid fa-pencil"></i></a></td>
-            <td align="center"><a href="{% url 'delete_task' task.id %}"><i class="fa-sharp fa-solid fa-xmark"></i></a></td>
-        </tr>
-    {% endfor %}
-    </tbody>
-</table>
+            </tbody>
+        </table>
+    </form>
 {% endblock %}

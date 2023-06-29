@@ -1,6 +1,6 @@
 from django.shortcuts import render, get_object_or_404, redirect
 
-from todolist.forms.forms_task import TaskForm
+from todolist.forms.forms_task import TaskForm, TaskMultyDelete
 from todolist.models import ToDoList, status_choices
 
 
@@ -38,8 +38,13 @@ def detail_task(request, pk):
 
 def delete_task(request, pk):
     to_do_list = get_object_or_404(ToDoList, pk=pk)
-    to_do_list.delete()
-    return redirect('home')
+    if request.method == "GET":
+        return render(request, 'delete_task.html', {"to_do_list": to_do_list})
+    else:
+        button = request.POST.get("delete")
+        if button:
+            to_do_list.delete()
+        return redirect('home')
 
 
 def edit_task(request, pk):
@@ -66,3 +71,11 @@ def edit_task(request, pk):
             return redirect('detail_task', pk=todolist.pk)
         else:
             return render(request, 'edit_task.html', {'form': form, 'todolist': todolist})
+
+
+def multiply_delete_task(request, *args, **kwargs):
+    check_list = request.POST.getlist('check')
+    for pk in check_list:
+        task = get_object_or_404(ToDoList, pk=pk)
+        task.delete()
+    return redirect('home')

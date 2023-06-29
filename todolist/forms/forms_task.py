@@ -11,5 +11,6 @@ class TaskForm(forms.Form):
         attrs={"class": "form-control"}))
     status = forms.ChoiceField(required=True, label='Статус', choices=status_choices,
                                widget=forms.Select(attrs={"class": "form-control"}))
-    date_of_completion = forms.DateField(required=False, label='Дата завершения', widget=widgets.DateInput(
-        attrs={"class": "form-control", 'type': 'date'}))
+    date_of_completion = forms.DateField(required=False, label='Дата завершения',
+                                         widget=widgets.DateInput(format='%Y-%m-%d',
+                                                                  attrs={"class": "form-control", 'type': 'date'}))
